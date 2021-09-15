@@ -1,22 +1,49 @@
 <template>
-  <el-row>
-    <el-col
-      :span="8"
-      v-for="(o, index) in 2"
-      :key="o"
-      :offset="index > 0 ? 2 : 0"
+  <div>
+    <el-row
+      v-for="n in 3"
+      :key="n"
+      type="flex"
+      justify="center"
+      align="middle"
+      class="img-row"
     >
-      <el-card :body-style="{ padding: '0px' }">
-        <img
-          src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-          class="image"
-        />
-        <div style="padding: 14px">
-          <span></span>
-        </div>
-      </el-card>
-    </el-col>
-  </el-row>
+      <el-col
+        :span="6"
+        v-for="(resource, index) in resourceList.slice(3 * (n - 1), 3 * n)"
+        :key="index"
+        :offset="index > 0 ? 1 : 0"
+      >
+        <el-card :body-style="{ padding: '0px' }" align="middle" shadow="hover">
+          <div @click="toShow(resource.viewUrl)" class="click-div">
+            <el-image
+              style="width: 200px; height: 200px; padding: 5px"
+              :src="resource.imgUrl"
+              fit="fill"
+            >
+              <div slot="error" class="image-slot">
+                <i class="el-icon-picture-outline"></i></div
+            ></el-image>
+            <div style="padding: 8px">
+              <span style=" text-align=center"
+                >{{ resource.collectionName }} -{{ resource.name }}</span
+              >
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+    <div class="pagination">
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        background
+        layout="total, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -24,6 +51,69 @@
 export default {
   name: 'Home',
   components: {
+  },
+  data () {
+    return {
+      resourceList: [],
+      currentPage: 1,
+      pageSize: 9,
+      total: 0,
+    }
+  },
+  methods: {
+    handleSelectionChange (val) {
+      this.multipleSelection = val
+    },
+    handleCurrentChange (val) {
+      this.currentPage = val
+      this.getTableData()
+    },
+    getTableData () {
+      this.$axios({
+        method: 'get',
+        url: '/list',
+        params: {
+          pageNumber: this.currentPage,
+          pageSize: this.pageSize
+        }
+      }).then(res => {
+        this.total = res.data[1]
+        this.resourceList = res.data[0]
+      })
+    },
+    toShow (path) {
+      window.open(path, '_blank')
+    }
+  },
+  created () {
+    this.getTableData()
   }
 }
 </script>
+
+<style scoped>
+.img-row {
+  margin: 10px;
+}
+.image {
+  width: 100%;
+  display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.el-pagination {
+  text-align: center;
+}
+.click-div {
+  cursor: pointer;
+}
+</style>
