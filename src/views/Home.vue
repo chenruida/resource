@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 style="text-align: center">东明博物馆</h1>
     <el-row
       v-for="n in 3"
       :key="n"
