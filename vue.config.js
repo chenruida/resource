@@ -4,7 +4,7 @@ module.exports = {
   assetsDir: "static", //静态资源文件名称
   chainWebpack: (config) => {
     config.plugin("html").tap((args) => {
-      args[0].title = "馆藏文物数字化资源管理系统";
+      args[0].title = "东明博物馆";
       return args;
     });
   },
