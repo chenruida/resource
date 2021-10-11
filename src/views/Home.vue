@@ -16,20 +16,20 @@
         :offset="index > 0 ? 1 : 0"
       >
         <el-card :body-style="{ padding: '0px' }" align="middle" shadow="hover">
-          <div @click="toShow(resource.viewUrl)" class="click-div">
-            <el-image
-              style="width: 200px; height: 200px; padding: 5px"
-              :src="resource.imgUrl"
-              fit="fill"
+          <!-- <div @click="toShow(resource.viewUrl)" class="click-div"> -->
+          <el-image
+            style="width: 200px; height: 200px; padding: 5px"
+            :src="resource.imgUrl"
+            fit="fill"
+          >
+            <div slot="error" class="image-slot">
+              <i class="el-icon-picture-outline"></i></div
+          ></el-image>
+          <div style="padding: 8px">
+            <span style=" text-align=center"
+              >{{ resource.collectionName }} -{{ resource.name }}</span
             >
-              <div slot="error" class="image-slot">
-                <i class="el-icon-picture-outline"></i></div
-            ></el-image>
-            <div style="padding: 8px">
-              <span style=" text-align=center"
-                >{{ resource.collectionName }} -{{ resource.name }}</span
-              >
-            </div>
+            <!-- </div> -->
           </div>
         </el-card>
       </el-col>
