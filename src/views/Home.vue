@@ -16,20 +16,28 @@
         :offset="index > 0 ? 1 : 0"
       >
         <el-card :body-style="{ padding: '0px' }" align="middle" shadow="hover">
-          <!-- <div @click="toShow(resource.viewUrl)" class="click-div"> -->
-          <el-image
-            style="width: 200px; height: 200px; padding: 5px"
-            :src="resource.imgUrl"
-            fit="fill"
-          >
-            <div slot="error" class="image-slot">
-              <i class="el-icon-picture-outline"></i></div
-          ></el-image>
+          <vue-hover-mask class="mask">
+            <el-image
+              style="width: 200px; height: 200px; padding: 5px"
+              :src="resource.imgUrl"
+              fit="fill"
+            >
+              <div slot="error" class="image-slot">
+                <i class="el-icon-picture-outline"></i></div
+            ></el-image>
+            <template v-slot:action class="mask">
+              <li>
+                <i class="el-icon-grape">正射影像</i>
+              </li>
+              <li>
+                <i class="el-icon-refrigerator">三维模型</i>
+              </li>
+            </template>
+          </vue-hover-mask>
           <div style="padding: 8px">
             <span style=" text-align=center"
               >{{ resource.collectionName }} -{{ resource.name }}</span
             >
-            <!-- </div> -->
           </div>
         </el-card>
       </el-col>
@@ -48,10 +56,11 @@
 </template>
 
 <script>
-
+import VueHoverMask from 'vue-hover-mask'
 export default {
   name: 'Home',
   components: {
+    VueHoverMask
   },
   data () {
     return {
@@ -92,7 +101,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .img-row {
   margin: 10px;
 }
@@ -116,5 +125,9 @@ export default {
 }
 .click-div {
   cursor: pointer;
+}
+.mask {
+  width: 100%;
+  align-content: center;
 }
 </style>
