@@ -19,25 +19,27 @@
           <vue-hover-mask class="mask">
             <el-image
               style="width: 200px; height: 200px; padding: 5px"
-              :src="resource.imgUrl"
+              :src="resource.img"
               fit="fill"
             >
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i></div
             ></el-image>
             <template v-slot:action class="mask">
-              <li>
-                <i class="el-icon-grape">正射影像</i>
+              <li v-if="resource.zs" class="mask-button">
+                <i class="el-icon-grape" @click="toShow(resource.zs)"
+                  >正射影像</i
+                >
               </li>
-              <li>
-                <i class="el-icon-refrigerator">三维模型</i>
+              <li v-if="resource.sw" class="mask-button">
+                <i class="el-icon-refrigerator" @click="toShow(resource.sw)"
+                  >三维模型</i
+                >
               </li>
             </template>
           </vue-hover-mask>
           <div style="padding: 8px">
-            <span style=" text-align=center"
-              >{{ resource.collectionName }} -{{ resource.name }}</span
-            >
+            <span style=" text-align=center">{{ resource.name }}</span>
           </div>
         </el-card>
       </el-col>
@@ -101,7 +103,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .img-row {
   margin: 10px;
 }
@@ -129,5 +131,8 @@ export default {
 .mask {
   width: 100%;
   align-content: center;
+}
+.mask-button {
+  margin-top: 10%;
 }
 </style>
