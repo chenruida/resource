@@ -12,7 +12,7 @@ Vue.use(Col);
 Vue.use(Image);
 Vue.use(Pagination);
 Vue.prototype.$axios = axios;
-// Vue.prototype.$axios.defaults.baseURL = "http://192.168.70.153:3000";
+Vue.prototype.$axios.defaults.baseURL = "http://121.89.215.206:8002";
 
 new Vue({
   router,

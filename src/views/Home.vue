@@ -83,7 +83,7 @@ export default {
     getTableData () {
       this.$axios({
         method: 'get',
-        url: 'http://192.168.70.153:3000/list',
+        url: '/resource/list',
         params: {
           pageNumber: this.currentPage,
           pageSize: this.pageSize
