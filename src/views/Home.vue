@@ -19,7 +19,7 @@
           <vue-hover-mask class="mask">
             <el-image
               style="width: 200px; height: 200px; padding: 5px"
-              :src="resource.img"
+              :src="RESOURCE_BASE_URL + resource.img"
               fit="fill"
             >
               <div slot="error" class="image-slot">
