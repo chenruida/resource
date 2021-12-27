@@ -89,7 +89,7 @@ export default {
           pageSize: this.pageSize
         }
       }).then(res => {
-        this.total = res.data[1]
+        this.total = res.data[2]
         this.resourceList = res.data[0]
       })
     },

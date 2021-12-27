@@ -2,7 +2,7 @@ module.exports = {
   // 公共路径(必须有的)
   publicPath: "./",
   // 输出文件目录
-  outputDir: "/var/www/resource",
+  outputDir: "./resource",
   //静态资源文件名称
   assetsDir: "static",
   chainWebpack: (config) => {
